@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <title>Bubble</title>
+</head>
+
+<style>
+    body{
+        background: linear-gradient(to bottom,#2DAFC2 0%, #2D446F 100%);
+        height: 100vh;
+        overflow: hidden;
+        
+    }    
+    .bubble{
+
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: transparent;
+        box-shadow: inset 0 0 10px rgba(255,255,255,0.5);
+        position:relative;
+        animation: animate 4s linear forwards;
+    
+    }
+@keyframes animate{
+     0% 
+    {
+        left:90% ;
+        top: 0px;
+    }
+    
+    100% 
+    {
+       left:90% ;
+        top: 80%;
+
+    }
+}
+
+
+
+/* bubble div container  */
+.bubble {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.bubble .paneltext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #bcd9ea;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 58px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 0%; /*cover the bubble*/
+  left: 50%;
+  margin-left: -80px;
+}
+
+
+/* Toggle this class - hide and show the panel */
+.bubble .show {
+  visibility: visible;
+  display: block;
+  -webkit-animation:forwards fadeIn 1s forwards;
+  animation: forwards fadeIn 1s forwards;
+  animation-fill-mode: forwards;
+
+}
+
+/* Add animation (fade in the panel) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+   
+</style>
+
+<body>
+  
+
+
+
+
+    <script type="text/javascript">
+    let div = document.createElement('div');
+    div.className = 'bubble';
+    div.onclick = function() {myFunction()};
+    function myFunction(){
+        var bubble = document.getElementById("panel");
+        bubble.classList.toggle("show")
+    }
+ 
+    let span = document.createElement('span');
+    span.id = 'panel';
+    span.className = 'paneltext';
+
+    let btn = document.createElement('BUTTON');
+    btn.innerHTML = "&#10005";
+    btn.onclick= function(){contactos};
+    function contact() {
+        var btn = document.createElement("BUTTON");
+        btn.innerHTML = "CLICK ME";
+        document.body.appendChild(btn);
+      }
+
+    span.appendChild(btn);
+    let refresh = document.createElement('BUTTON');
+    refresh.innerHTML = "&#x21bb";
+    span.appendChild(refresh);
+    let contacto = document.createElement('BUTTON');
+    contacto.innerHTML = "Contact us";
+    span.appendChild(contacto);
+ 
+    div.appendChild(span);
+    document.body.appendChild(div)
+
+
+    function contact() {
+        var btn = document.createElement("BUTTON");
+        btn.innerHTML = "CLICK ME";
+        document.body.appendChild(btn);
+      }
+
+   
+
+
+
+
+    </script>
+
+    
+</body>
+</html>
