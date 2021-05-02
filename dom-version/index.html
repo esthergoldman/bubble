@@ -4,146 +4,392 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
    
-    <title>Bubble</title>
+    <title>DOM Bubble</title>
 </head>
 
-<style>
-    body{
-        background: linear-gradient(to bottom,#2DAFC2 0%, #2D446F 100%);
-        height: 100vh;
-        overflow: hidden;
-        
-    }    
-    .bubble{
-
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        background: transparent;
-        box-shadow: inset 0 0 10px rgba(255,255,255,0.5);
-        position:relative;
-        animation: animate 4s linear forwards;
-    
-    }
-@keyframes animate{
-     0% 
-    {
-        left:90% ;
-        top: 0px;
-    }
-    
-    100% 
-    {
-       left:90% ;
-        top: 80%;
-
-    }
-}
-
-
-
-/* bubble div container  */
-.bubble {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* The actual popup */
-.bubble .paneltext {
-  visibility: hidden;
-  width: 160px;
-  background-color: #bcd9ea;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 58px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 0%; /*cover the bubble*/
-  left: 50%;
-  margin-left: -80px;
-}
-
-
-/* Toggle this class - hide and show the panel */
-.bubble .show {
-  visibility: visible;
-  display: block;
-  -webkit-animation:forwards fadeIn 1s forwards;
-  animation: forwards fadeIn 1s forwards;
-  animation-fill-mode: forwards;
-
-}
-
-/* Add animation (fade in the panel) */
-@-webkit-keyframes fadeIn {
-  from {opacity: 0;} 
-  to {opacity: 1;}
-}
-
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity:1 ;}
-}
-   
-</style>
 
 <body>
-  
-
-
-
-
+ 
     <script type="text/javascript">
+
+    /* body */    
+    document.body.style.background = 'linear-gradient(to bottom,#2DAFC2 0%, #2D446F 100%)' ;
+    document.body.style.height = '110vh';
+    document.body.style.overflow = 'hidden';
+
+    /* bubble */
     let div = document.createElement('div');
-    div.className = 'bubble';
-    div.onclick = function() {myFunction()};
-    function myFunction(){
-        var bubble = document.getElementById("panel");
-        bubble.classList.toggle("show")
-    }
- 
-    let span = document.createElement('span');
-    span.id = 'panel';
-    span.className = 'paneltext';
-
-    let btn = document.createElement('BUTTON');
-    btn.innerHTML = "&#10005";
-    btn.onclick= function(){contactos};
-    function contact() {
-        var btn = document.createElement("BUTTON");
-        btn.innerHTML = "CLICK ME";
-        document.body.appendChild(btn);
+      div.className = 'bubble';
+      div.id = 'the-bubble';
+      div.style.backgroundColor = 'transparent';
+      div.style.boxShadow = 'inset 0 0 10px lightblue' ;
+      div.style.width = '100px';
+      div.style.height = '100px';
+      div.style.position = 'relative';
+      div.style.borderRadius = '50%';
+      div.style.animation = 'animate 4s linear forwards';
+      div.style.cursor = 'pointer';
+      div.onclick = function() {openPanel()};
+      function openPanel(){
+          document.getElementById('my-panel').style.display = 'block';
+          document.getElementById('the-bubble').style.backgroundColor = 'transparent';
+          document.getElementById('the-bubble').style.boxShadow = 'inset 0 0 10px transparent' ;
+        
       }
-
-    span.appendChild(btn);
-    let refresh = document.createElement('BUTTON');
-    refresh.innerHTML = "&#x21bb";
-    span.appendChild(refresh);
-    let contacto = document.createElement('BUTTON');
-    contacto.innerHTML = "Contact us";
-    span.appendChild(contacto);
- 
-    div.appendChild(span);
     document.body.appendChild(div)
 
 
-    function contact() {
-        var btn = document.createElement("BUTTON");
-        btn.innerHTML = "CLICK ME";
-        document.body.appendChild(btn);
-      }
+    /* panel pop up */
+    let span = document.createElement('span');
+      span.id = 'panel';
+      span.className = 'paneltext';
+    document.body.appendChild(span)
 
+    /* Popup panel - hidden by default */
+    let popup = document.createElement('div');
+      popup.id = 'my-panel';
+      popup.className = 'panel-popup';
+      popup.style.position = 'fixed';
+      popup.style.display= 'none';
+      popup.style.backgroundColor = 'white';
+      popup.style.padding = '5px 18px';
+      
+
+    span.appendChild(popup);
+
+
+    /* Btn close */
+    let btn = document.createElement('BUTTON');
+      btn.id = 'button';
+      btn.innerHTML = '<i class="fas fa-times"></i>';
+      btn.style.backgroundColor = '#147298';
+      btn.style.cursor = 'pointer';
+      btn.style.border = 'none';
+      btn.style.borderRadius = '6px';
+      btn.style.color = 'white';
+      btn.style.padding = '6px';
+      btn.style.margin = '8px 5px';
+
+      btn.onclick = function() {closeButton()};
+        function closeButton() {
+            document.getElementById('my-panel').style.display = 'none';
+            document.getElementById('the-bubble').style.boxShadow = 'inset 0 0 10px lightblue' ;
+        }
+    popup.appendChild(btn);
+
+     /* Btn refresh */
+    let refresh = document.createElement('BUTTON');
+      refresh.id = 'button';
+      refresh.innerHTML = '<i class="fas fa-sync-alt"></i>';
+      refresh.style.backgroundColor = "#147298";
+      refresh.style.cursor = 'pointer';
+      refresh.style.border = 'none';
+      refresh.style.borderRadius = '6px';
+      refresh.style.color = 'white';
+      refresh.style.padding = '6px';
+      refresh.style.margin = '8px 5px';
+      
+      refresh.onclick = function() {clean()};
+      function clean(){
+        document.getElementById('my-panel').style.display = 'block';
+        document.getElementById('apanel').style.display = 'none';
+      } 
+    popup.appendChild(refresh);
+
+
+    /* Btn contact */
+    let contacto = document.createElement('BUTTON');
+      contacto.id = 'button';
+      contacto.innerHTML = 'Contact us';
+      contacto.style.backgroundColor = '#147298';
+      contacto.style.cursor = 'pointer';
+      contacto.style.border = 'none';
+      contacto.style.outline = 'none';
+      contacto.style.borderRadius = '6px';
+      contacto.style.color = 'white';
+      contacto.style.fontFamily = 'Open Sans, sans-serif';
+      contacto.style.fontSize = 'small';
+      contacto.style.padding = '4px';
+      contacto.style.margin = '8px 5px';
+      
+      contacto.onclick = function() {openForm()};
+        function openForm() {
+            document.getElementById('my-form').style.display = 'block';
+            document.getElementById('my-panel').style.display = 'none';
+          }
+    popup.appendChild(contacto);
+
+     /* about accordion */
+
+    let about = document.createElement('SECTION');
+    popup.appendChild(about);
+    
+    let abtn = document.createElement('BUTTON');
+      abtn.className = 'accordion';
+      abtn.innerHTML = 'About';
+      abtn.style.backgroundColor = 'white';
+      abtn.style.cursor = 'pointer';
+      abtn.style.border = 'none';
+      abtn.style.borderRadius = '6px';
+      abtn.style.color = 'black';
+      abtn.style.fontFamily = 'Open Sans, sans-serif';
+      abtn.style.fontSize = '20px';
+      abtn.style.outline = 'none';
+      abtn.style.width = '100%';
+      abtn.style.padding = '18px';
+      
+      
+    about.appendChild(abtn);
+
+    let adiv = document.createElement('div');
+      adiv.id = 'apanel';
+      adiv.style.padding = '0 18px';
+      adiv.style.backgroundColor = 'white';
+      adiv.style.display= "none";
+
+
+    about.appendChild(adiv);
+
+    let lista = document.createElement('UL');
+      lista.style.textAlign = 'left';
+      lista.style.listStyle = 'none';
+      lista.style.fontFamily = 'Open Sans, sans-serif';
+      lista.style.padding = '0';
+      lista.style.margin = '0';
+
+    adiv.appendChild(lista);
+
+    let li = document.createElement('LI');
+      li.style.padding = '12px';
+      li.innerHTML = 'Number of images: 0';
+    lista.appendChild(li);
+    
+    let lii = document.createElement('LI');
+      lii.style.padding = '12px';
+      lii.innerHTML = 'Number of elements with position fixed: 2';
+    lista.appendChild(lii);
+  
+
+    /* Popup form - hidden by default */
+
+    let form = document.createElement('div');
+      form.id = 'my-form';
+      form.className = 'form-popup';
+      form.style.position = 'fixed';
+      form.style.display= "none";
+      form.style.backgroundColor = 'white';
+      form.style.width = '300px';
+      form.style.height = '500px';
+      form.style.borderRadius = '6px';
+      form.style.fontFamily = 'Open Sans, sans-serif';
+      form.innerHTML = 'Contact us';
+      form.style.textAlign = 'center';      
+      form.onclick = function() {formVal()};
+
+
+      
+    span.appendChild(form);
+
+
+    let inside = document.createElement('FORM');
+      inside.id = 'the-form';
+      inside.name = 'contact';
+      inside.className = 'form-container';
+      inside.method = 'POST';
+    form.appendChild(inside);
+
+    let label = document.createElement('Label');
+      label.innerHTML= 'Name';
+    inside.appendChild(label)
+
+    let names = document.createElement('INPUT');
+      names.type='TEXT';
+      names.id = 'name';
+      names.name = 'name';
+      names.className = 'inputs';
+      names.style.width = '90%';
+      names.style.padding = '2px 20px';
+      names.style.margin = '8px 0';
+      names.style.display = 'inline-block';
+      names.style.border = '1px solid #ccc';
+      names.style.borderRadius = '4px';
+      names.style.boxSizing = 'border-box';
+      names.style.outline = 'none';
+      names.style.fontFamily = 'Open Sans, sans-serif';
+    inside.appendChild(names);
+    let nameval = document.createElement('p');
+      nameval.id= 'demo';
+    inside.appendChild(nameval);    
    
+    let labels = document.createElement('Label');
+      labels.innerHTML= 'Email';
+    inside.appendChild(labels)
+
+    let email = document.createElement('INPUT');
+      email.type='TEXT';
+      email.id = 'email';
+      email.name = 'email';
+      email.className = 'inputs';
+      email.style.width = '90%';
+      email.style.padding = '2px 20px';
+      email.style.margin = '8px 0';
+      email.style.display = 'inline-block';
+      email.style.border = '1px solid #ccc';
+      email.style.borderRadius = '4px';
+      email.style.boxSizing = 'border-box';
+      email.style.outline = 'none';
+      email.style.fontFamily = 'Open Sans, sans-serif';
+    inside.appendChild(email);
+
+    let resval = document.createElement('p');
+      resval.id= 'result';
+    inside.appendChild(resval);    
+
+     
+    let message = document.createElement('Label');
+      message.innerHTML= 'Message';
+    inside.appendChild(message);
+
+    let mtext = document.createElement('TEXTAREA');
+      mtext.type='TEXT';
+      mtext.id = 'validate';
+      mtext.name = 'message';
+      mtext.style.width = '90%';
+      mtext.style.padding = '12px 20px';
+      mtext.style.margin = '8px 0';
+      mtext.style.display = 'inline-block';
+      mtext.style.border = '1px solid #ccc';
+      mtext.style.borderRadius = '4px';
+      mtext.style.boxSizing = 'border-box';
+      mtext.style.outline = 'none';
+      mtext.style.fontFamily = 'Open Sans, sans-serif';
+      mtext.style.resize = 'none';
+    inside.appendChild(mtext);
+     
 
 
 
+    /* Popup form - buttons */
+
+    let submit = document.createElement('BUTTON');
+      submit.id = 'submit';
+      submit.innerHTML = 'Submit';
+      submit.style.backgroundColor = '#147298';
+      submit.style.cursor = 'pointer';
+      submit.style.border = 'none';
+      submit.style.borderRadius = '6px';
+      submit.style.color = 'white';
+      submit.style.fontFamily = 'Open Sans, sans-serif';
+      submit.style.width = '90%';
+      submit.style.padding = '18px';
+      submit.style.margin = '8px 0';
+
+      
+      submit.onclick = function() {submitForm()};
+        function submitForm() {
+          $.ajax({
+            url:'https://api.apispreadsheets.com/data/11518/',
+            type:'post',
+            data:$("#the-form").serializeArray(),
+            success: function(){
+              alert("Message was sent :)")
+
+            },
+            error: function(){
+              alert("There was an error :(")
+            }
+        });
+    
+            document.getElementById('the-form').reset();
+          }
+    form.appendChild(submit);
+
+     
+     /* About */
+   
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+    for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+        panel.style.display = "none";
+        } else {
+        panel.style.display = "block";
+        }
+    });
+    }
+
+
+
+    let back = document.createElement('BUTTON');
+      back.id = 'back';
+      back.innerHTML = 'Back';
+      back.style.backgroundColor = '#147298';
+      back.style.cursor = 'pointer';
+      back.style.border = 'none';
+      back.style.borderRadius = '6px';
+      back.style.color = 'white';
+      back.style.fontFamily = 'Open Sans, sans-serif';
+      back.style.width = '90%';
+      back.style.padding = '18px';
+      back.onclick = function() {closeForm()};
+        function closeForm() {
+            document.getElementById('my-form').style.display = 'none';
+            document.getElementById('my-panel').style.display = 'block';
+          }
+    form.appendChild(back);
+
+
+    
+/* Validation email*/
+
+        function validateEmail(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+        }
+
+        function validate() {
+        const $result = $("#result");
+        const email = $("#email").val();
+        $result.text("");
+
+        if (validateEmail(email)) {
+       
+        } else {
+            $result.text(email + " is not valid");
+            $result.css("color", "red");
+        }
+        return false;
+        }
+
+        $("#validate").on("click", validate);
+
+  
+/* Validation*/
+    function formVal(){
+        var txt;
+        var name = 
+            document.forms["the-form"]["name"];
+       
+        if (name == null ||name.value == "") {
+            txt = "please enter your name";
+            document.getElementById("demo").innerHTML = txt;
+            document.getElementById("demo").style.color = "red";
+
+        } else {
+            document.getElementById("demo").style.display = "none";
+        }
+        return false;
+        }
 
     </script>
 

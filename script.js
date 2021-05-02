@@ -2,24 +2,30 @@
     /* Panel */
     function openPanel() {
           document.getElementById("myPanel").style.display = "block";
+          document.getElementById("modal").style.backgroundColor = "white";
+
     }
 
     function closeButton() {
         document.getElementById("myPanel").style.display = "none";
+        document.getElementById("modal").style.backgroundColor = "blue";
     }
-
-    /* Form */
 
     function clean(){
 	window.location.reload();
     } 
 
+    /* Form */
    function openForm() {
         document.getElementById("myForm").style.display = "block";
+        document.getElementById("myPanel").style.display = "none";
+
     }
 
     function closeForm() {
         document.getElementById("myForm").style.display = "none";
+        document.getElementById("myPanel").style.display = "block";
+
     }
 
     
@@ -42,22 +48,19 @@
 
     /* Validation*/
     function FormVal(){
+        var txt;
         var name = 
             document.forms["theForm"]["name"];
-        var email = 
-            document.forms["theForm"]["email"];
-        if (name.value == "") {
-            window.alert("Please enter your name.");
-            name.focus();
-            return false;
+       
+        if (name == null ||name.value == "") {
+            txt = "please enter your name";
+            document.getElementById("demo").innerHTML = txt;
+            document.getElementById("demo").style.color = "red";
+
+        } else {
+            document.getElementById("demo").style.display = "none";
         }
-        if (email.value == "") {
-            window.alert(
-            "Please enter a valid e-mail address.");
-            email.focus();
-            return false;
-        }
-        return true;
+        return false;
         }
         
     /* Validation email*/

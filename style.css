@@ -1,5 +1,5 @@
 body{
-    background: linear-gradient(to bottom,#2DAFC2 0%, #2D446F 100%);
+    background: white;
     height: 100vh;
     overflow: hidden;
     font-family: 'Open Sans', sans-serif;
@@ -9,8 +9,7 @@ body{
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    background: transparent;
-    box-shadow: inset 0 0 10px rgba(255,255,255,0.5);
+    background: blue;
     position:relative;
     animation: animate 4s linear forwards;
 
@@ -25,7 +24,7 @@ body{
     100% 
     {
     left:90% ;
-        top: 80%;
+    top: 80%;
 
     }
 }
@@ -52,16 +51,15 @@ hr{
 /* Popup panel - hidden by default */
 .panel-popup {
     display: none;
-    position: fixed;
-    margin-top: 0;
-    right: 15px;
-    z-index: 9;
+    position:fixed;
+    margin-left: 40%;
     width: 160px;
     background-color: #ffffff;
     color: rgb(0, 0, 0);
-    padding: 10px 0;
-    bottom: 4%; /*cover the bubble*/
+    padding: 5px 0;
     text-align: center;
+    border: 1px solid  rgb(7, 33, 87);
+    border-radius: 6px;
 
 
 }
@@ -127,19 +125,20 @@ ul li {
 
 /* Popup form - hidden by default */
 .form-popup {
+   
     display: none;
-    position: fixed;
-    bottom: 2%;
-    right: 15px;
-    z-index: 9;
+    position:fixed;
+    margin-left: 40%;
+    max-width: 500px;;
+    text-align: center;
     color:black;
+    max-width: 300px;
+    background-color: white;
+    border-radius: 6px;
+    border: 1px solid  rgb(7, 33, 87);
+    padding: 10px 10px 10px 10px;
 }
 
-.form-container {
-    max-width: 300px;
-    padding: 10px;
-    background-color: white;
-}
 
 input[type=text], select {
     width: 100%;

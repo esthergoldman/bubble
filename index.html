@@ -35,15 +35,20 @@
                     </ul>
                 </div>
         </section>
-       
+        </div>
+
         <div class="form-popup" id="myForm">
             <form name="contact"  id="theForm" class="form-container" onclick="return FormVal();">
                 <h1>Contact us</h1>
+
                 <label for="name">Name</label>
                 <input id="name" type="text" name="name" required>
+                <p id="demo"></p>
+
                 <label for="email">Email</label>
                 <input type="text"  name="email" required id="email">
-                <h2 id='result'></h2>
+
+                <p id='result'></p>
 
                 <label for="message">Message</label>
                 <textarea  name="message" id='validate' class="contact-form-text"></textarea>        
@@ -53,7 +58,6 @@
             <button type="submit" class="btn"  onclick="SubForm()">Submit</button>
             <button id="submit" type="button" class="btn cancel" onclick="closeForm()" >Back</button>
             </div>
-        </div>
 
     </span>
 
