@@ -12,8 +12,8 @@
     }
 
     function clean(){
-	window.location.reload();
-    } 
+        document.getElementById('myPanel').style.display = 'block';
+        document.getElementById('apanel').style.display = 'none';    } 
 
     /* Form */
    function openForm() {
